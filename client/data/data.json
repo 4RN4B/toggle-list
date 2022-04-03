@@ -1,0 +1,83 @@
+[
+    {
+        "id":1,
+        "name":"John",
+        "emp_id":12345,
+        "gender": "male",
+        "skills":"React JS",
+        "project":"CTS Internal",
+        "hcm":"Alex"
+    },{
+        "id":2,
+        "name":"John",
+        "emp_id":12345,
+        "gender": "female",
+        "skills":"React JS",
+        "project":"CTS Internal",
+        "hcm":"Alex"
+    },{
+        "id":3,
+        "name":"John",
+        "emp_id":12345,
+        "gender": "male",
+        "skills":"React JS",
+        "project":"CTS Internal",
+        "hcm":"Alex"
+    },{
+        "id":4,
+        "name":"John",
+        "emp_id":12345,
+        "gender": "male",
+        "skills":"React JS",
+        "project":"CTS Internal",
+        "hcm":"Alex"
+    },{
+        "id":5,
+        "name":"John",
+        "emp_id":12345,
+        "gender": "male",
+        "skills":"React JS",
+        "project":"CTS Internal",
+        "hcm":"Alex"
+    },{
+        "id":6,
+        "name":"John",
+        "emp_id":12345,
+        "gender": "female",
+        "skills":"React JS",
+        "project":"CTS Internal",
+        "hcm":"Alex"
+    },{
+        "id":7,
+        "name":"John",
+        "emp_id":12345,
+        "gender": "female",
+        "skills":"React JS",
+        "project":"CTS Internal",
+        "hcm":"Alex"
+    },{
+        "id":8,
+        "name":"John",
+        "emp_id":12345,
+        "gender": "female",
+        "skills":"React JS",
+        "project":"CTS Internal",
+        "hcm":"Alex"
+    },{
+        "id":9,
+        "name":"John",
+        "emp_id":12345,
+        "gender": "female",
+        "skills":"React JS",
+        "project":"CTS Internal",
+        "hcm":"Alex"
+    },{
+        "id":10,
+        "name":"John",
+        "emp_id":12345,
+        "gender": "male",
+        "skills":"React JS",
+        "project":"CTS Internal",
+        "hcm":"Alex"
+    }
+]
