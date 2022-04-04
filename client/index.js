@@ -157,9 +157,12 @@ const handleListButtons = (e, element) => {
             break;
         }
     }
-    let newData;
     let skillColumn = e.path[index].childNodes[4];
     let id = e.path[index].id;
+    let cardSkills =
+        document.getElementById("cards-section").children[id - 1].children[1]
+            .children[2];
+    console.log(cardSkills);
     if (element.classList.contains("edit-button")) {
         element.classList.remove("edit-button");
         element.classList.add("save-button");
@@ -184,6 +187,7 @@ const handleListButtons = (e, element) => {
             onSuccess: (data) => {
                 console.log(data[id - 1]);
                 skillColumn.innerHTML = data[id - 1].skills;
+                cardSkills.innerHTML = `Skills: ${data[id - 1].skills}`;
             },
         });
     } else {
