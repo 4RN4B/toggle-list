@@ -79,7 +79,7 @@ const handleFetch = (location, { method = "GET", onSuccess, data = {} }) => {
             "Content-Type": "application/json",
             "Accept-Type": "application/json",
         },
-        ...(method !== "GET" && { body: JSON.stringify({ data }) }),
+        ...(method !== "GET" && { body: JSON.stringify(data) }),
     })
         .then((res) => {
             return res.json();
@@ -100,20 +100,20 @@ handleFetch("/", {
             gridView.appendChild(createCard(element));
             listView.appendChild(createList(element));
         });
-        Array.from(document.querySelectorAll(".list-buttons")).forEach(
-            (element) => {
-                element.addEventListener("click", (e) => {
-                    handleCardButtons(e, element);
-                });
-            }
-        );
-        Array.from(document.querySelectorAll(".card-action-button")).forEach(
-            (element) => {
-                element.addEventListener("click", (e) => {
-                    handleListButtons(e, element);
-                });
-            }
-        );
+        const listButtons = [...document.querySelectorAll(".list-buttons")];
+        listButtons.forEach((element) => {
+            element.addEventListener("click", (e) => {
+                handleListButtons(e, element);
+            });
+        });
+        const cardButtons = [
+            ...document.querySelectorAll(".card-action-button"),
+        ];
+        cardButtons.forEach((element) => {
+            element.addEventListener("click", (e) => {
+                handleCardButtons(e, element);
+            });
+        });
     },
 });
 
@@ -148,15 +148,7 @@ document.getElementById("toggle-button").addEventListener("click", (e) => {
     }
 });
 
-/**
- * For changing the list action buttons
- */
-
-/**
- * Implemented the button actions for skills tab in Grid View
- */
-// let cardActionButtons =
-const handleCardButtons = (e, element) => {
+const handleListButtons = (e, element) => {
     let index;
     for (let i = 0; i < e.path.length; i++) {
         let classes = e.path[i].classList;
@@ -165,7 +157,9 @@ const handleCardButtons = (e, element) => {
             break;
         }
     }
+    let newData;
     let skillColumn = e.path[index].childNodes[4];
+    let id = e.path[index].id;
     if (element.classList.contains("edit-button")) {
         element.classList.remove("edit-button");
         element.classList.add("save-button");
@@ -178,14 +172,28 @@ const handleCardButtons = (e, element) => {
         // TODO: Have to take the new data from fetch after updating
         // !First complete here
         let newSkill = document.getElementById("skills-info");
-        let id = e.path[index].id;
         console.log(id);
-        // console.log(newSkill.value);
-        // handleFetch("/:");
-        skillColumn.innerHTML = newSkill.value;
+        handleFetch("/" + id, {
+            method: "PATCH",
+            onSuccess: (data) => {
+                console.log(data);
+            },
+            data: { skills: newSkill.value },
+        });
+        handleFetch("/", {
+            onSuccess: (data) => {
+                console.log(data[id - 1]);
+                skillColumn.innerHTML = data[id - 1].skills;
+            },
+        });
     } else {
         // Write code for cancel button
-        skillColumn.innerHTML = `React JS`;
+        handleFetch("/", {
+            onSuccess: (data) => {
+                console.log(data[id - 1]);
+                skillColumn.innerHTML = data[id - 1].skills;
+            },
+        });
         let index;
         for (let i = 0; i < e.path.length; i++) {
             let classes = e.path[i].classList;
@@ -203,7 +211,7 @@ const handleCardButtons = (e, element) => {
     }
 };
 
-const handleListButtons = (e, element) => {
+const handleCardButtons = (e, element) => {
     let skillElement = e.path[2].childNodes[2].children[2];
     if (element.classList.contains("save-edit-button")) {
         if (element.innerHTML.trim() === "Edit") {
