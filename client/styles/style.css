@@ -71,6 +71,10 @@ main {
 .btn-danger {
     background-color: red;
 }
+button > svg {
+    user-select: none;
+    pointer-events: none;
+}
 .cards,
 .lists {
     min-width: 80%;
