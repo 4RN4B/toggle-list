@@ -162,7 +162,6 @@ const handleListButtons = (e, element) => {
     let cardSkills =
         document.getElementById("cards-section").children[id - 1].children[1]
             .children[2];
-    console.log(cardSkills);
     if (element.classList.contains("edit-button")) {
         element.classList.remove("edit-button");
         element.classList.add("save-button");
@@ -172,29 +171,21 @@ const handleListButtons = (e, element) => {
         element.classList.remove("save-button");
         element.classList.add("edit-button");
         element.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"> <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" /> <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" /> </svg>`;
-        // TODO: Have to take the new data from fetch after updating
-        // !First complete here
         let newSkill = document.getElementById("skills-info");
-        console.log(id);
         handleFetch("/" + id, {
             method: "PATCH",
-            onSuccess: (data) => {
-                console.log(data);
-            },
+            onSuccess: (data) => {},
             data: { skills: newSkill.value },
         });
         handleFetch("/", {
             onSuccess: (data) => {
-                console.log(data[id - 1]);
                 skillColumn.innerHTML = data[id - 1].skills;
                 cardSkills.innerHTML = `Skills: ${data[id - 1].skills}`;
             },
         });
     } else {
-        // Write code for cancel button
         handleFetch("/", {
             onSuccess: (data) => {
-                console.log(data[id - 1]);
                 skillColumn.innerHTML = data[id - 1].skills;
             },
         });
@@ -217,22 +208,42 @@ const handleListButtons = (e, element) => {
 
 const handleCardButtons = (e, element) => {
     let skillElement = e.path[2].childNodes[2].children[2];
+    let id = e.path[2].id;
+    let listSkill =
+        document.getElementById("list-section").children[0].children[0]
+            .children[id].children[2].children[0];
     if (element.classList.contains("save-edit-button")) {
         if (element.innerHTML.trim() === "Edit") {
             element.innerHTML = "Save";
-            skillElement.innerHTML = `<span>Skills: </span><input type="text" class="skills" name="skills"></input>`;
+            skillElement.innerHTML = `<span>Skills: </span><input type="text" id="skills-info" class="skills" name="skills"></input>`;
         } else {
-            element.innerHTML = "Edit";
-            // TODO: Write a function to save the editted skills in JSON file.
-            skillElement.innerHTML = `<div class="skills">Skills: ReactJS, Angular, JS</div>`;
+            let newSkill = document.getElementById("skills-info");
+            handleFetch("/" + id, {
+                method: "PATCH",
+                onSuccess: (data) => {},
+                data: { skills: newSkill.value },
+            });
+            handleFetch("/", {
+                onSuccess: (data) => {
+                    skillElement.innerHTML = `<div class="skills">Skills:${
+                        data[id - 1].skills
+                    }</div>`;
+                    listSkill.innerHTML = data[id - 1].skills;
+                },
+            });
         }
     } else {
         let previousButton = e.path[2].children[2].firstElementChild;
         if (previousButton.innerHTML.trim() === "Save") {
             previousButton.innerHTML = "Edit";
         }
-        // TODO: Change this with the previous value using fetch
-        skillElement.innerHTML = `<div class="skills">Skills: ReactJS, Angular, JS</div>`;
+        handleFetch("/", {
+            onSuccess: (data) => {
+                skillElement.innerHTML = `<div class="skills">Skills:${
+                    data[id - 1].skills
+                }</div>`;
+            },
+        });
     }
 };
 
