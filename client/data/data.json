@@ -2,23 +2,79 @@
     {
         "id":1,
         "name":"John",
-        "emp_id":12345,
+        "emp_id":12340,
         "gender": "male",
-        "skills":"React JS",
+        "skills":"React JS, C++",
         "project":"CTS Internal",
         "hcm":"Alex"
     },{
         "id":2,
         "name":"Alexa",
+        "emp_id":12341,
+        "gender": "female",
+        "skills":"Angular JS, Java, C++",
+        "project":"CTS Internal",
+        "hcm":"Alex"
+    },{
+        "id":3,
+        "name":"Gary",
+        "emp_id":12342,
+        "gender": "male",
+        "skills":"Python, React JS",
+        "project":"CTS Internal",
+        "hcm":"Alex"
+    },{
+        "id":4,
+        "name":"Rahul",
+        "emp_id":12343,
+        "gender": "male",
+        "skills":"React JS",
+        "project":"CTS Internal",
+        "hcm":"Alex"
+    },{
+        "id":5,
+        "name":"Soumen",
+        "emp_id":12344,
+        "gender": "male",
+        "skills":"React JS",
+        "project":"CTS Internal",
+        "hcm":"Alex"
+    },{
+        "id":6,
+        "name":"Sneha",
         "emp_id":12345,
         "gender": "female",
         "skills":"React JS",
         "project":"CTS Internal",
         "hcm":"Alex"
     },{
-        "id":3,
+        "id":7,
+        "name":"Nivedita",
+        "emp_id":12346,
+        "gender": "female",
+        "skills":"React JS",
+        "project":"CTS Internal",
+        "hcm":"Alex"
+    },{
+        "id":8,
+        "name":"Harry",
+        "emp_id":12347,
+        "gender": "male",
+        "skills":"React JS",
+        "project":"CTS Internal",
+        "hcm":"Alex"
+    },{
+        "id":9,
+        "name":"Siri",
+        "emp_id":12348,
+        "gender": "female",
+        "skills":"React JS",
+        "project":"CTS Internal",
+        "hcm":"Alex"
+    },{
+        "id":10,
         "name":"Gary",
-        "emp_id":12345,
+        "emp_id":12349,
         "gender": "male",
         "skills":"React JS",
         "project":"CTS Internal",
