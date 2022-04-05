@@ -199,12 +199,7 @@ const handleListButtons = (e, element) => {
                 data: {},
             });
         } else {
-            //!Check here error when edit and cancel is pressed
-            handleFetch("/", {
-                onSuccess: (data) => {
-                    skillColumn.innerHTML = data[id - 1].skills;
-                },
-            });
+            skillColumn.innerHTML = previousData;
             let index;
             for (let i = 0; i < e.path.length; i++) {
                 let classes = e.path[i].classList;
@@ -224,7 +219,6 @@ const handleListButtons = (e, element) => {
 };
 
 const handleCardButtons = (e, element) => {
-    // console.log(e);
     let id = Number(e.path[2].getAttribute("data-card-id"));
     let listSkill = document
         .getElementById(`list-${id}`)
@@ -232,8 +226,7 @@ const handleCardButtons = (e, element) => {
     let skillElement = document
         .getElementById(`div-${id}`)
         .querySelector(".skills");
-    previousData = skillElement.innerHTML;
-    // console.log(skillElement);
+    previousData = listSkill.children[0].innerHTML;
     if (element.classList.contains("close-button")) {
         handleFetch("/" + id, {
             method: "DELETE",
@@ -247,40 +240,30 @@ const handleCardButtons = (e, element) => {
         if (element.classList.contains("save-edit-button")) {
             if (element.innerHTML.trim() === "Edit") {
                 element.innerHTML = "Save";
-                previousData = skillElement;
                 skillElement.innerHTML = `<span>Skills: </span><input type="text" id="skills-info-${id}" class="skills" name="skills"></input>`;
             } else {
-                // TODO: If inputted nothing after clicking Edit and then Saved previous data will be restored.
                 element.innerHTML = "Edit";
                 let newSkill = document.getElementById(`skills-info-${id}`);
                 if (newSkill.value !== "") {
                     handleFetch("/" + id, {
                         method: "PATCH",
                         onSuccess: (data) => {
-                            skillElement.innerHTML = `<div class="skills p-10">Skills: ${newSkill.value}</div>`;
+                            skillElement.innerHTML = `<div class="skills">Skills: ${newSkill.value}</div>`;
                             listSkill.innerHTML = newSkill.value;
                         },
                         data: { skills: newSkill.value },
                     });
                 } else {
-                    skillElement.innerHTML = `${previousData}`;
+                    skillElement.innerHTML = `<div class="skills">Skills: ${previousData}</div>`;
                 }
             }
         } else {
+            console.log(id);
             let previousButton = e.path[2].children[2].firstElementChild;
             if (previousButton.innerHTML.trim() === "Save") {
                 previousButton.innerHTML = "Edit";
             }
-            //!Check here error when edit and cancel is pressed
-            handleFetch("/", {
-                onSuccess: (data) => {
-                    skillElement.innerHTML = `<div class="skills">Skills: ${
-                        data[id - 1].skills
-                    }</div>`;
-                },
-            });
+            skillElement.innerHTML = `<div class="skills">Skills: ${previousData}</div>`;
         }
     }
 };
-
-// TODO: Have to implement the delete key for both grid and list view
