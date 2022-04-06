@@ -96,33 +96,31 @@ const handleFetch = (location, { method = "GET", onSuccess, data = {} }) => {
         });
 };
 
-const temporary = () => {
-    handleFetch("/", {
-        onSuccess: (data) => {
-            const gridView = document.getElementById("cards-section");
-            const listView = document.querySelector("#list-section table");
-            data.forEach((element) => {
-                gridView.appendChild(createCard(element));
-                listView.appendChild(createList(element));
+handleFetch("/", {
+    onSuccess: (data) => {
+        console.log("fetch Called");
+        const gridView = document.getElementById("cards-section");
+        const listView = document.querySelector("#list-section table");
+        data.forEach((element) => {
+            gridView.appendChild(createCard(element));
+            listView.appendChild(createList(element));
+        });
+        const listButtons = [...document.querySelectorAll(".list-buttons")];
+        listButtons.forEach((element) => {
+            element.addEventListener("click", (e) => {
+                handleListButtons(e, element);
             });
-            const listButtons = [...document.querySelectorAll(".list-buttons")];
-            listButtons.forEach((element) => {
-                element.addEventListener("click", (e) => {
-                    handleListButtons(e, element);
-                });
+        });
+        const cardButtons = [
+            ...document.querySelectorAll(".card-action-button"),
+        ];
+        cardButtons.forEach((element) => {
+            element.addEventListener("click", (e) => {
+                handleCardButtons(e, element);
             });
-            const cardButtons = [
-                ...document.querySelectorAll(".card-action-button"),
-            ];
-            cardButtons.forEach((element) => {
-                element.addEventListener("click", (e) => {
-                    handleCardButtons(e, element);
-                });
-            });
-        },
-    });
-};
-temporary();
+        });
+    },
+});
 /**
  * For toggling the grid and list icon
  */
@@ -194,7 +192,9 @@ const handleListButtons = (e, element) => {
             handleFetch("/" + id, {
                 method: "DELETE",
                 onSuccess: (data) => {
-                    window.location.reload();
+                    console.log(data);
+                    let removeElement = document.getElementById(`list-${id}`);
+                    removeElement.parentNode.removeChild(removeElement);
                 },
                 data: {},
             });
@@ -231,7 +231,8 @@ const handleCardButtons = (e, element) => {
         handleFetch("/" + id, {
             method: "DELETE",
             onSuccess: (data) => {
-                window.location.reload();
+                let removeElement = document.getElementById(`div-${id}`);
+                removeElement.parentNode.removeChild(removeElement);
             },
             data: {},
         });
@@ -258,7 +259,6 @@ const handleCardButtons = (e, element) => {
                 }
             }
         } else {
-            console.log(id);
             let previousButton = e.path[2].children[2].firstElementChild;
             if (previousButton.innerHTML.trim() === "Save") {
                 previousButton.innerHTML = "Edit";

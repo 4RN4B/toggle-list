@@ -28,7 +28,7 @@
         "name":"Rahul",
         "emp_id":12343,
         "gender": "male",
-        "skills":"React JS",
+        "skills":"React JS, CPP",
         "project":"CTS Internal",
         "hcm":"Alex"
     },{
@@ -36,7 +36,7 @@
         "name":"Soumen",
         "emp_id":12344,
         "gender": "male",
-        "skills":"React JS",
+        "skills":"JavaScript, MongoDB",
         "project":"CTS Internal",
         "hcm":"Alex"
     },{
@@ -44,7 +44,7 @@
         "name":"Sneha",
         "emp_id":12345,
         "gender": "female",
-        "skills":"React JS",
+        "skills":"C#, TypeScript",
         "project":"CTS Internal",
         "hcm":"Alex"
     },{
@@ -52,7 +52,7 @@
         "name":"Nivedita",
         "emp_id":12346,
         "gender": "female",
-        "skills":"React JS",
+        "skills":"TypeScript, JavaScript",
         "project":"CTS Internal",
         "hcm":"Alex"
     },{
@@ -60,7 +60,7 @@
         "name":"Harry",
         "emp_id":12347,
         "gender": "male",
-        "skills":"React JS",
+        "skills":"GO, Java",
         "project":"CTS Internal",
         "hcm":"Alex"
     },{
@@ -68,7 +68,7 @@
         "name":"Siri",
         "emp_id":12348,
         "gender": "female",
-        "skills":"React JS",
+        "skills":"Ruby, PHP",
         "project":"CTS Internal",
         "hcm":"Alex"
     },{
@@ -76,7 +76,7 @@
         "name":"Gary",
         "emp_id":12349,
         "gender": "male",
-        "skills":"React JS",
+        "skills":"React JS, Python",
         "project":"CTS Internal",
         "hcm":"Alex"
     }

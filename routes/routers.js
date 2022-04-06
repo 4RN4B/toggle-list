@@ -32,7 +32,7 @@ router.get("/", (req, res) => {
 router.patch("/:id", (req, res) => {
     const id = req.params.id;
     try {
-        const requiredIndex = data.findIndex((element) => {
+        const requiredIndex = newData.findIndex((element) => {
             return element.id == id;
         });
         if (requiredIndex == -1) {
@@ -52,7 +52,7 @@ router.patch("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
     const id = req.params.id;
     try {
-        const requiredIndex = data.findIndex((element) => {
+        const requiredIndex = newData.findIndex((element) => {
             return element.id == id;
         });
         if (requiredIndex == -1) {
