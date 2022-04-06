@@ -98,7 +98,6 @@ const handleFetch = (location, { method = "GET", onSuccess, data = {} }) => {
 
 handleFetch("/", {
     onSuccess: (data) => {
-        console.log("fetch Called");
         const gridView = document.getElementById("cards-section");
         const listView = document.querySelector("#list-section table");
         data.forEach((element) => {
@@ -192,7 +191,6 @@ const handleListButtons = (e, element) => {
             handleFetch("/" + id, {
                 method: "DELETE",
                 onSuccess: (data) => {
-                    console.log(data);
                     let removeElement = document.getElementById(`list-${id}`);
                     removeElement.parentNode.removeChild(removeElement);
                 },

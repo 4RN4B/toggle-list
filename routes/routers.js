@@ -21,7 +21,6 @@ const writeFileFunc = (newData) => {
 // Get all data
 router.get("/", (req, res) => {
     try {
-        console.log("new user data:", newData);
         res.json(newData);
     } catch (err) {
         res.status(500).json({ message: err.message });
