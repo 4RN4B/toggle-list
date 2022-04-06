@@ -1,4 +1,4 @@
-const serverAddress = "http://localhost:3001";
+const serverAddress = "http://localhost:3000";
 
 const createCard = (user) => {
     let temp = document.createElement("div");

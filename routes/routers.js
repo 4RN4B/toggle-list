@@ -1,12 +1,28 @@
 const express = require("express");
+const fs = require("fs");
 const router = express.Router();
-const data = require("../client/data/data.json");
+
+const readFileFunc = () => {
+    const fileData = JSON.parse(fs.readFileSync("./client/data/data.json"));
+    return fileData;
+};
+const newData = readFileFunc();
+
+const writeFileFunc = (newData) => {
+    let rawData = JSON.stringify(newData, null, 2);
+    fs.writeFile("./client/data/data.json", rawData, (err) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+    });
+};
 
 // Get all data
 router.get("/", (req, res) => {
     try {
-        const userData = data;
-        res.json(userData);
+        console.log("new user data:", newData);
+        res.json(newData);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -23,10 +39,10 @@ router.patch("/:id", (req, res) => {
             res.status(404).json({ message: "Cannot find user" });
         }
         if (req.body.skills != null) {
-            data[requiredIndex].skills = req.body.skills;
+            newData[requiredIndex].skills = req.body.skills;
         }
+        writeFileFunc(newData);
         res.json({ message: "Updated User" });
-        console.log(data);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -42,10 +58,9 @@ router.delete("/:id", (req, res) => {
         if (requiredIndex == -1) {
             return res.status(404).json({ message: "Cannot find user" });
         }
-        data.splice(requiredIndex, 1);
-        // res.json(data);
+        newData.splice(requiredIndex, 1);
+        writeFileFunc(newData);
         res.json({ message: "Deleted User" });
-        // console.log(data);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
